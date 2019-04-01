@@ -1,0 +1,11 @@
+.DS_Store
+.idea/*
+*.pyc
+config/local.env
+config/pro.env
+log/*
+*.log
+*.log.*
+log/script_logger/*
+log/script_logger/*.log
+log/script_logger/*.log.*
