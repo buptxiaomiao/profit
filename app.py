@@ -3,24 +3,9 @@
 import fire
 
 
-class Script(object):
-
-    @classmethod
-    def role_level_exp(cls):
-        from scripts.crawl.role_level_exp import RoleLevelExpCrawl
-        RoleLevelExpCrawl().main()
-
-    @classmethod
-    def role_practice(cls):
-        from scripts.crawl.role_practice import RolePracticeCrawl
-        RolePracticeCrawl().main()
-
-
 class App(object):
-    
-    @classmethod
-    def script(cls):
-        return Script
+
+    pass
 
 
 if __name__ == '__main__':

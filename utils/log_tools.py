@@ -121,5 +121,5 @@ def _get_log_path(dir_name):
     return log_path
 
 
-script_logger = BaseLogger('script').gen_logger(_get_log_path('script'))
+logger = BaseLogger('logger').gen_logger(_get_log_path('log'))
 api_logger = BaseLogger('api').gen_logger(_get_log_path('api'))

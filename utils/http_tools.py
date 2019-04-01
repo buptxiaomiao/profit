@@ -3,7 +3,7 @@
 import requests
 import json
 from random import randint
-from utils.const import CONST
+from utils.const import USER_AGENT_LIST
 
 
 class Res(object):
@@ -16,8 +16,8 @@ class RequestAPI(object):
 
     @classmethod
     def get_user_agent(cls):
-        i = randint(0, len(CONST.user_agent_list) - 1)
-        return CONST.user_agent_list[i]
+        i = randint(0, len(USER_AGENT_LIST) - 1)
+        return USER_AGENT_LIST[i]
 
     @classmethod
     def access_data(cls, url, method='GET', params=None, headers=None, token='', timeout=None, access_headers=None,
