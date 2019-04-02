@@ -16,7 +16,7 @@ class Stock(BaseModel):
     area = CharField(16, default='')            # 所在地域
     industry = CharField(32, default='')        # 所属行业
     market = CharField(32, default='')          # 主板/中小板/创业板
-    exchange = CharField(32, default='')        # 交易所代码
+    exchange = CharField(32, default='')        # 交易所代码, SSE上交所 SZSE深交所
     list_status = CharField(8, default='')      # L上市 D退市 P暂停上市
     list_date = CharField(32, default='')       # 上市时间
     is_hs = CharField(32, default='')           # 是否沪深港通标的，N否 H沪股通 S深股通
