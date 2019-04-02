@@ -27,17 +27,17 @@ class MyRetryDb(MySQLDatabase):
         return cursor
 
 
-def get_mysql_client(host='localhost', port=3306, user='', password='', db=''):
+def get_mysql_client(host='localhost', port=3306, user='', password='', db='profit'):
     return MyRetryDb(host=host, port=port, user=user, password=password, database=db)
 
 
-mhxy_db = get_mysql_client(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
+db = get_mysql_client(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
 
 
 class BaseModel(Model):
 
     class Meta:
-        database = mhxy_db
+        database = db
 
     @classmethod
     def get_one(cls, *query, **kwargs):
