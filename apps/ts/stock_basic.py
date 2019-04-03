@@ -1,9 +1,10 @@
 # coding: utf-8
 
 import tushare as ts
+
 from settings.settings import TS_TOKEN
-from models.stock import Stock
 from utils.df_to_models import DfToModels
+from models.stock import Stock
 
 
 class TsStockBasic(object):

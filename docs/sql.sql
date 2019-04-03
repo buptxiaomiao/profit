@@ -30,3 +30,18 @@ CREATE TABLE `trade_cal` (
   KEY `is_open_cal_date` (`is_open`,`cal_date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7306 DEFAULT CHARSET=utf8mb4 COMMENT='交易日历'
 
+
+CREATE TABLE `hs_const` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
+  `hs_type` char(8) NOT NULL DEFAULT '' COMMENT '沪深港通类型SH沪SZ深',
+  `in_date` char(16) NOT NULL DEFAULT '' COMMENT '纳入日期',
+  `out_date` char(16) NOT NULL DEFAULT '' COMMENT '剔除日期',
+  `is_new` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否最新 1是 0否',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `ts_code` (`ts_code`),
+  KEY `hs_type` (`hs_type`),
+  KEY `in_date` (`in_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='沪深股通成份股'
