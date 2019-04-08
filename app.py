@@ -5,7 +5,10 @@ import fire
 
 class App(object):
 
-    pass
+    @classmethod
+    def daily(cls):
+        from apps.ts.daily import TsDaily
+        TsDaily.run()
 
 
 if __name__ == '__main__':
