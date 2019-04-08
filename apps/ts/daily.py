@@ -4,6 +4,7 @@ import time
 import tushare as ts
 
 from settings.settings import TS_TOKEN
+from utils.log_tools import logger
 from models.stock import Stock
 from models.daily import Daily
 from utils.df_to_models import DfToModels
@@ -29,17 +30,20 @@ class TsDaily(object):
             # 第一部分
             df1 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                              start_date=start_date, end_date=mid_date, ma=ma)
-            model_list1 = DfToModels.df2models(df1, Daily)
+            model_list1 = DfToModels.df2models(df1, Daily, to_dict=True)
 
             # 第二部分
             df2 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                              start_date=mid_date, end_date=end_date, ma=ma)
-            model_list2 = DfToModels.df2models(df2, Daily)
+            model_list2 = DfToModels.df2models(df2, Daily, to_dict=True)
 
             Daily.delete_by_ts_code(ts_code=ts_code)
-            Daily.bulk_create(model_list1, 1000)
-            Daily.bulk_create(model_list2, 1000)
-
+            try:
+                Daily.batch_insert(model_list1, 5)
+                Daily.batch_insert(model_list2, 5)
+            except Exception as e:
+                logger.error(e.message, exc_info=True)
+                raise Exception
             print '{} -- {} / {}'.format(ts_code, i, len(db_res))
             time.sleep(0.01)
             break

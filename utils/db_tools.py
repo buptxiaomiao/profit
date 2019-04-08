@@ -7,6 +7,7 @@ from peewee import Model
 from peewee import DoesNotExist
 from peewee import chunked
 
+from utils.log_tools import logger
 from settings.settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
 
 
@@ -53,6 +54,11 @@ class BaseModel(Model):
         if not dict_list:
             return
         for batch in chunked(dict_list, nums):
-            cls.insert_many(batch).execute()
+            try:
+                cls.insert_many(batch).execute()
+            except Exception as e:
+                logger.error(e.message, exc_info=True)
+                logger.error(batch)
+                raise Exception
         print 'insert {} rows:{}'.format(cls.__name__.lower(), len(dict_list))
         return
