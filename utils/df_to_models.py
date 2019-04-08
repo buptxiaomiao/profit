@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import numpy as np
+
 from utils.time_tool import TimeTool
 
 
@@ -18,7 +20,7 @@ class DfToModels(object):
         fields = model_class._meta.fields.keys()
         for _, row in df.iterrows():
             d = row.to_dict()
-            d = {k: d[k] for k in fields if d.get(k, None)}
+            d = {k: d[k] for k in fields if d.get(k, None) and d.get(k, None) is not np.nan}
             if to_dict:
                 l.append(d)
             else:
