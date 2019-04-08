@@ -3,6 +3,7 @@
 import numpy as np
 
 from utils.time_tool import TimeTool
+from utils.log_tools import logger
 
 
 class DfToModels(object):

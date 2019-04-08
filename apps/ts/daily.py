@@ -31,13 +31,13 @@ class TsDaily(object):
                 # 第一部分
                 df1 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                                  start_date=start_date, end_date=mid_date, ma=ma)
-                df1.fillna(0)
+                df1 = df1.fillna(0)
                 model_list1 = DfToModels.df2models(df1, Daily, to_dict=True)
 
                 # 第二部分
                 df2 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                                  start_date=mid_date, end_date=end_date, ma=ma)
-                df2.fillna(0)
+                df2 = df2.fillna(0)
                 model_list2 = DfToModels.df2models(df2, Daily, to_dict=True)
 
                 Daily.delete_by_ts_code(ts_code=ts_code)
@@ -48,7 +48,6 @@ class TsDaily(object):
 
             except Exception as e:
                 logger.error(e.message, exc_info=True)
-                break
 
 
 if __name__ == '__main__':

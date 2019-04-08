@@ -115,7 +115,7 @@ class BaseLogger(object):
 
 
 def _get_log_path(dir_name):
-    log_path = '{}/log/{}/'.format(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), dir_name)
+    log_path = '{}/{}/'.format(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), dir_name)
     if not os.path.isdir(log_path):
         os.makedirs(log_path)
     return log_path
