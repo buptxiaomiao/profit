@@ -22,3 +22,18 @@ class Stock(BaseModel):
     is_hs = CharField(32, default='')           # 是否沪深港通标的，N否 H沪股通 S深股通
     create_time = DateTimeField()
     update_time = DateTimeField()
+
+    @classmethod
+    def query_focus_stocks(cls):
+        """
+        正在上市、非创业板、非ST
+        :return:
+        """
+        db_res = cls.select().where(cls.list_status == 'L', cls.market != '创业板').order_by(cls.ts_code)
+
+        result = []
+        for x in db_res:
+            if 'ST' in x.name:
+                continue
+            result.append(x)
+        return result
