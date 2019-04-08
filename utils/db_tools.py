@@ -54,11 +54,6 @@ class BaseModel(Model):
         if not dict_list:
             return
         for batch in chunked(dict_list, nums):
-            try:
-                cls.insert_many(batch).execute()
-            except Exception as e:
-                logger.error(e.message, exc_info=True)
-                logger.error(batch)
-                raise Exception
+            cls.insert_many(batch).execute()
         print 'insert {} rows:{}'.format(cls.__name__.lower(), len(dict_list))
         return
