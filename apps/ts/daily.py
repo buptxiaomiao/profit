@@ -29,16 +29,16 @@ class TsDaily(object):
             # 第一部分
             df1 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                              start_date=start_date, end_date=mid_date, ma=ma)
-            list1 = DfToModels.df2models(df1, Daily, return_dict=True)
+            model_list1 = DfToModels.df2models(df1, Daily, return_dict=True)
 
             # 第二部分
             df2 = ts.pro_bar(ts_code=ts_code, pro_api=cls.pro, adj='qfq',
                              start_date=mid_date, end_date=end_date, ma=ma)
-            list2 = DfToModels.df2models(df2, Daily, return_dict=True)
+            model_list2 = DfToModels.df2models(df2, Daily, return_dict=True)
 
             Daily.delete_by_ts_code(ts_code=ts_code)
-            Daily.batch_insert(list1)
-            Daily.batch_insert(list2)
+            Daily.bulk_create(model_list1, 1000)
+            Daily.bulk_create(model_list2, 1000)
 
             print '{} -- {} / {}'.format(ts_code, i, len(db_res))
             time.sleep(0.01)
