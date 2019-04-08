@@ -9,7 +9,7 @@ class DfToModels(object):
     """
 
     @classmethod
-    def df2models(cls, df, model_class):
+    def df2models(cls, df, model_class, return_dict=False):
         """
         DataFrame -> Model
         :return:
@@ -27,6 +27,9 @@ class DfToModels(object):
                 # 处理None值 & 多余字段
                 if not d[x] or x in trash_cols:
                     del d[x]
+            if return_dict:
+                l.append(d)
+                continue
 
             o = model_class(**d)
             if hasattr(model_class, 'create_time'):

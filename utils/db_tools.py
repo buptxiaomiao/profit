@@ -5,6 +5,7 @@ from peewee import OperationalError
 from peewee import __exception_wrapper__
 from peewee import Model
 from peewee import DoesNotExist
+from peewee import chunked
 
 from settings.settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
 
@@ -45,3 +46,13 @@ class BaseModel(Model):
             return cls.get(*query, **kwargs)
         except DoesNotExist:
             return None
+
+    @classmethod
+    def batch_insert(cls, dict_list, nums=1000):
+        """批量创建"""
+        if not dict_list:
+            return
+        for batch in chunked(dict_list, nums):
+            cls.insert_many(batch).execute()
+        print 'insert {} rows:{}'.format(cls.__name__.lower(), len(dict_list))
+        return
