@@ -62,3 +62,41 @@ CREATE TABLE `namechange` (
   KEY `start_date` (`start_date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1318 DEFAULT CHARSET=utf8mb4 COMMENT='股票曾用名'
 
+
+CREATE TABLE `daily` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
+  `trade_date` int(11) NOT NULL DEFAULT '0' COMMENT '交易日期',
+  `open` float NOT NULL DEFAULT '0' COMMENT '开盘价',
+  `high` float NOT NULL DEFAULT '0' COMMENT '最高价',
+  `low` float NOT NULL DEFAULT '0' COMMENT '最低价',
+  `close` float NOT NULL DEFAULT '0' COMMENT '收盘价',
+  `pre_close` float NOT NULL DEFAULT '0' COMMENT '昨收价',
+  `change` float NOT NULL DEFAULT '0' COMMENT '涨跌额',
+  `pct_chg` float NOT NULL DEFAULT '0' COMMENT '涨跌幅',
+  `vol` float NOT NULL DEFAULT '0' COMMENT '成交量（手）',
+  `amount` float NOT NULL DEFAULT '0' COMMENT '成交额 （千元）',
+  `ma2` float NOT NULL DEFAULT '0' COMMENT '2日均价',
+  `ma5` float NOT NULL DEFAULT '0' COMMENT '5日均价',
+  `ma10` float NOT NULL DEFAULT '0' COMMENT '10日均价',
+  `ma12` float NOT NULL DEFAULT '0' COMMENT '12日均价',
+  `ma26` float NOT NULL DEFAULT '0' COMMENT '26日均价',
+  `ma30` float NOT NULL DEFAULT '0' COMMENT '30日均价',
+  `ma60` float NOT NULL DEFAULT '0' COMMENT '60日均价',
+  `ma120` float NOT NULL DEFAULT '0' COMMENT '120日均价',
+  `ma250` float NOT NULL DEFAULT '0' COMMENT '250日均价',
+  `ma_v_2` float NOT NULL DEFAULT '0',
+  `ma_v_5` float NOT NULL DEFAULT '0',
+  `ma_v_10` float NOT NULL DEFAULT '0',
+  `ma_v_12` float NOT NULL DEFAULT '0',
+  `ma_v_26` float NOT NULL DEFAULT '0',
+  `ma_v_30` float NOT NULL DEFAULT '0',
+  `ma_v_60` float NOT NULL DEFAULT '0',
+  `ma_v_120` float NOT NULL DEFAULT '0',
+  `ma_v_250` float NOT NULL DEFAULT '0',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `ts_code_trade_date` (`ts_code`,`trade_date`),
+  KEY `trade_date_ts_code` (`trade_date`,`ts_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=9642 DEFAULT CHARSET=utf8mb4 COMMENT='A股非创业板日线'

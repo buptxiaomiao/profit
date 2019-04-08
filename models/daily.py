@@ -21,15 +21,15 @@ class Daily(BaseModel):
     pct_chg = FloatField(default=0)     # 涨跌幅
     vol = FloatField(default=0)         # 成交量（手）
     amount = FloatField(default=0)      # 成交额 （千元）
-    ma_2 = FloatField(default=0)    # 2日均价
-    ma_5 = FloatField(default=0)    # 5日均价
-    ma_10 = FloatField(default=0)   # 10日均价
-    ma_12 = FloatField(default=0)   # 12日均价
-    ma_26 = FloatField(default=0)   # 26日均价
-    ma_30 = FloatField(default=0)   # 30日均价
-    ma_60 = FloatField(default=0)   # 60日均价
-    ma_120 = FloatField(default=0)  # 120日均价
-    ma_250 = FloatField(default=0)  # 250日均价
+    ma2 = FloatField(default=0)    # 2日均价
+    ma5 = FloatField(default=0)    # 5日均价
+    ma10 = FloatField(default=0)   # 10日均价
+    ma12 = FloatField(default=0)   # 12日均价
+    ma26 = FloatField(default=0)   # 26日均价
+    ma30 = FloatField(default=0)   # 30日均价
+    ma60 = FloatField(default=0)   # 60日均价
+    ma120 = FloatField(default=0)  # 120日均价
+    ma250 = FloatField(default=0)  # 250日均价
     ma_v_2 = FloatField(default=0)      # 2日均成交量（手）
     ma_v_5 = FloatField(default=0)      # 5日均成交量（手）
     ma_v_10 = FloatField(default=0)     # 10日均成交量（手）
