@@ -44,4 +44,7 @@ class Daily(BaseModel):
 
     @classmethod
     def delete_by_ts_code(cls, ts_code):
-        return cls.delete().where(cls.ts_code == ts_code).execute()
+        db_res = cls.select().where(cls.ts_code == ts_code).limit(1)
+        if db_res:
+            return cls.delete().where(cls.ts_code == ts_code).execute()
+        return None
