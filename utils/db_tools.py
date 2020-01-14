@@ -7,8 +7,7 @@ from peewee import Model
 from peewee import DoesNotExist
 from peewee import chunked
 
-from utils.log_tools import logger
-from settings.settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+from settings import DB_HOST, DB_PORT, DB_USER, DB_PASSWD, DB_NAME
 
 
 class MyRetryDb(MySQLDatabase):
@@ -29,11 +28,12 @@ class MyRetryDb(MySQLDatabase):
         return cursor
 
 
-def get_mysql_client(host='localhost', port=3306, user='', password='', db='profit'):
-    return MyRetryDb(host=host, port=port, user=user, password=password, database=db)
+def get_mysql_client(host='localhost', port=3306, user='', password='', database='profit'):
+    return MyRetryDb(host=host, port=port, user=user, password=password, database=database, charset='utf8mb4')
 
 
-db = get_mysql_client(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME)
+db = get_mysql_client(DB_HOST, DB_PORT, DB_USER, DB_PASSWD, DB_NAME)
+conn = get_mysql_client(DB_HOST, DB_PORT, DB_USER, DB_PASSWD, DB_NAME)
 
 
 class BaseModel(Model):

@@ -10,6 +10,11 @@ class App(object):
         from apps.ts.daily import TsDaily
         TsDaily.run()
 
+    @classmethod
+    def task(cls):
+        from apps.tasks import Task
+        return Task
+
 
 if __name__ == '__main__':
     fire.Fire(App())

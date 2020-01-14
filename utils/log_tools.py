@@ -122,4 +122,3 @@ def _get_log_path(dir_name):
 
 
 logger = BaseLogger('logger').gen_logger(_get_log_path('log'))
-api_logger = BaseLogger('api').gen_logger(_get_log_path('api'))
