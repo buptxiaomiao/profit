@@ -26,6 +26,7 @@ CREATE TABLE `trade_cal` (
   `pretrade_date` char(16) NOT NULL DEFAULT '' COMMENT '上一个交易日',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `nexttrade_date` char(16) NOT NULL DEFAULT '' COMMENT '下个交易日',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ex_cal` (`cal_date`,`exchange`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='交易日历'

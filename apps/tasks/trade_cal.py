@@ -35,7 +35,7 @@ class TaskTradeCal(object):
             kwargs.update(start_date=et)
 
         # 交易日历
-        df = pro.trade_cal(**kwargs)
+        df = pro.trade_cal(fields=fields, **kwargs)
 
         cursor = conn.cursor()
         cursor.execute('set SESSION autocommit = 0;')
@@ -44,6 +44,13 @@ class TaskTradeCal(object):
             sql = 'replace into trade_cal ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
             print sql, row.values
             cursor.execute(sql, tuple([x or '' for x in row.values]))
+        cursor.execute("""
+            UPDATE trade_cal a
+            JOIN ( SELECT * FROM trade_cal WHERE is_open = 1 ) t ON ( t.pretrade_date = a.cal_date ) 
+            SET a.nexttrade_date = t.cal_date 
+            WHERE
+                a.is_open = 1;
+        """)
         cursor.execute('alter table trade_cal engine=innodb; ')
         conn.commit()
         cursor.close()
