@@ -27,8 +27,8 @@ CREATE TABLE `trade_cal` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  KEY `is_open_cal_date` (`is_open`,`cal_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=7306 DEFAULT CHARSET=utf8mb4 COMMENT='交易日历'
+  UNIQUE KEY `ex_cal` (`cal_date`,`exchange`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='交易日历'
 
 
 CREATE TABLE `hs_const` (

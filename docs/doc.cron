@@ -1,0 +1,7 @@
+
+# 1. 基本信息
+1 0 * * * source ~/.env && cd /root/profit && python app.py task stock
+
+# 2. 交易日历
+1 0 * * 1 source ~/.env && cd /root/profit && python app.py task trade_cal
+
