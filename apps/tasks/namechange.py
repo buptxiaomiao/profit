@@ -9,7 +9,7 @@ from utils.db_tools import conn
 class TaskNameChange(object):
 
     @classmethod
-    def run(cls):
+    def run(cls, ts_code=''):
         """
         历史名称变更记录
         https://tushare.pro/document/2?doc_id=100
@@ -30,14 +30,14 @@ class TaskNameChange(object):
         ]
 
         cursor = conn.cursor()
-        cursor.execute('select ts_code, list_date from stock;')
+        cursor.execute('select ts_code, list_date from stock where ts_code >= %s order by ts_code asc;', ts_code)
         res = cursor.fetchall()
         cursor.execute('set SESSION autocommit = 0;')
         for x in res:
 
             ts_code = x[0]
             # 名称变更记录
-            time.sleep(0.01)
+            time.sleep(0.3)
             try:
                 df = pro.namechange(ts_code=ts_code, fields=fields)
             except Exception as e:
