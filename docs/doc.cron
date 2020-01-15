@@ -5,3 +5,5 @@
 # 2. 交易日历
 1 0 * * 1 source ~/.env && cd /root/profit && python app.py task trade_cal
 
+# 3. 股票名称变更
+1 0 * * * source ~/.env && cd /root/profit && python app.py task namechange
