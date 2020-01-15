@@ -9,3 +9,5 @@ log/*
 log/script_logger/*
 log/script_logger/*.log
 log/script_logger/*.log.*
+.env
+settings/.env
