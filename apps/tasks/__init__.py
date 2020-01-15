@@ -2,6 +2,7 @@
 
 from apps.tasks.stock import TaskStockBasic
 from apps.tasks.trade_cal import TaskTradeCal
+from apps.tasks.namechange import TaskNameChange
 
 
 class Task(object):
@@ -13,3 +14,7 @@ class Task(object):
     @classmethod
     def trade_cal(cls):
         return TaskTradeCal.run()
+
+    @classmethod
+    def namechange(cls):
+        return TaskNameChange.run()

@@ -32,6 +32,21 @@ CREATE TABLE `trade_cal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='交易日历'
 
 
+CREATE TABLE `namechange` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
+  `name` varchar(128) NOT NULL DEFAULT '' COMMENT '证券名称',
+  `start_date` char(16) NOT NULL DEFAULT '' COMMENT '开始日期',
+  `end_date` char(16) NOT NULL DEFAULT '' COMMENT '结束日期',
+  `ann_date` char(16) NOT NULL DEFAULT '' COMMENT '公告日期',
+  `change_reason` char(128) NOT NULL DEFAULT '' COMMENT '变更原因',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ts_code` (`ts_code`,`start_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='股票曾用名'
+
+
 CREATE TABLE `hs_const` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
@@ -46,22 +61,6 @@ CREATE TABLE `hs_const` (
   KEY `hs_type` (`hs_type`),
   KEY `in_date` (`in_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='沪深股通成份股'
-
-
-CREATE TABLE `namechange` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
-  `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
-  `name` VARCHAR(128) NOT NULL DEFAULT '' COMMENT '证券名称',
-  `start_date` char(16) NOT NULL DEFAULT '' COMMENT '开始日期',
-  `end_date` char(16) NOT NULL DEFAULT '' COMMENT '结束日期',
-  `change_reason` CHAR(128) NOT NULL DEFAULT '' COMMENT '变更原因',
-  `ann_date` char(16) NOT NULL DEFAULT '' COMMENT '公告日期',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  KEY `ts_code` (`ts_code`),
-  KEY `start_date` (`start_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=1318 DEFAULT CHARSET=utf8mb4 COMMENT='股票曾用名'
 
 
 CREATE TABLE `daily` (
