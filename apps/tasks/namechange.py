@@ -30,7 +30,7 @@ class TaskNameChange(object):
         ]
 
         cursor = conn.cursor()
-        cursor.execute('select ts_code, list_date from stock where ts_code >= %s order by ts_code asc;', ts_code)
+        cursor.execute('select ts_code, list_date from stock where ts_code >= %s order by ts_code asc;', (ts_code, ))
         res = cursor.fetchall()
         cursor.execute('set SESSION autocommit = 0;')
         for x in res:
