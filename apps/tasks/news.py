@@ -27,6 +27,9 @@ class TaskNews(object):
         et = TimeTool.str_to_datetime(et) or TimeTool.now() + TimeTool.timedelta(minutes=1)
         st = TimeTool.str_to_datetime(st) or et - TimeTool.timedelta(minutes=30)
 
+        st = str(st)
+        et = str(et)
+
         # 设置ts token
         ts.set_token(TOKEN)
         pro = ts.pro_api()
@@ -45,6 +48,7 @@ class TaskNews(object):
 
         for src in cls.SRC_LIST:
             df = pro.news(src=src, start_date=st, end_date=et, fields=fields)
+
             for i, row in df.iterrows():
 
                 news_time = row['datetime'] or '0001-01-01 00:00:00'
