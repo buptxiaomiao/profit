@@ -56,7 +56,7 @@ class TaskNews(object):
                 title = d.get('title', '') or ''
                 content = d.get('content', '') or ''
                 content_hash = hash(content)
-                channels = d.get('channels', '') or ''
+                channels = str(d.get('channels', '')) or ''
 
                 sql = 'select 1 from news where news_time = %s and content_hash = %s and src= %s;'
                 cursor.execute(sql, (news_time, content_hash, src))
@@ -65,9 +65,9 @@ class TaskNews(object):
                     continue
 
                 sql = "replace into " \
-                      "news (new_time, title, content, content_hash, channels) " \
-                      "values (%s, %s, %s, %s, %s)"
-                cursor.execute(sql, (news_time, title, content, content_hash, channels))
+                      "news (src, news_time, title, content, content_hash, channels) " \
+                      "values (%s, %s, %s, %s, %s, %s)"
+                cursor.execute(sql, (src, news_time, title, content, content_hash, channels))
 
         conn.commit()
         cursor.close()
