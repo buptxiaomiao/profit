@@ -47,12 +47,11 @@ class TaskNews(object):
             df = pro.news(src=src, start_date=st, end_date=et, fields=fields)
             for i, row in df.iterrows():
 
-                d = row.to_dict()
-                news_time = d.get('datetime', '0001-01-01 00:00:00') or '0001-01-01 00:00:00'
-                title = d.get('title', '') or ''
-                content = d.get('content', '') or ''
+                news_time = row['datetime'] or '0001-01-01 00:00:00'
+                title = row['title'] or ''
+                content = row['content'] or ''
                 content_hash = hash(content)
-                channels = d.get('channels', '') or ''
+                channels = row['channels'] or ''
 
                 sql = 'select 1 from news where news_time = %s and content_hash = %s and src= %s;' \
                       % (news_time, content_hash, src)
