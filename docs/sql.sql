@@ -100,3 +100,17 @@ CREATE TABLE `daily` (
   KEY `ts_code_trade_date` (`ts_code`,`trade_date`),
   KEY `trade_date_ts_code` (`trade_date`,`ts_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9642 DEFAULT CHARSET=utf8mb4 COMMENT='A股非创业板日线'
+
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `src` char(16) NOT NULL DEFAULT '' COMMENT '来源',
+  `news_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '新闻时间',
+  `title` text COMMENT '标题',
+  `content` mediumtext COMMENT '内容',
+  `content_hash` bigint(20) NOT NULL DEFAULT '0' COMMENT '内容hash',
+  `channels` text COMMENT '分类',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `time_hash_src` (`news_time`,`content_hash`,`src`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='新闻简讯'

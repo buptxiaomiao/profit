@@ -4,6 +4,7 @@ from apps.tasks.stock import TaskStockBasic
 from apps.tasks.trade_cal import TaskTradeCal
 from apps.tasks.namechange import TaskNameChange
 from apps.tasks.hs_const import TaskHSConst
+from apps.tasks.news import TaskNews
 
 
 class Task(object):
@@ -23,3 +24,8 @@ class Task(object):
     @classmethod
     def hs_const(cls):
         return TaskHSConst.run()
+
+    @classmethod
+    def news(cls):
+        return TaskNews.run()
+
