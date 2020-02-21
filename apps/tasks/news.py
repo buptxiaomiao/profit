@@ -51,15 +51,15 @@ class TaskNews(object):
 
             for i, row in df.iterrows():
 
-                news_time = row['datetime'] or '0001-01-01 00:00:00'
-                title = row['title'] or ''
-                content = row['content'] or ''
+                d = row.to_dict()
+                news_time = d.get('datetime', '0001-01-01 00:00:00') or '0001-01-01 00:00:00'
+                title = d.get('title', '') or ''
+                content = d.get('content', '') or ''
                 content_hash = hash(content)
-                channels = row['channels'] or ''
+                channels = d.get('channels', '') or ''
 
-                sql = 'select 1 from news where news_time = %s and content_hash = %s and src= %s;' \
-                      % (news_time, content_hash, src)
-                cursor.execute(sql)
+                sql = 'select 1 from news where news_time = %s and content_hash = %s and src= %s;'
+                cursor.execute(sql, (news_time, content_hash, src))
                 res = cursor.fetchall()
                 if res:
                     continue
