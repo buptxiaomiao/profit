@@ -31,9 +31,9 @@ class NewsMail(object):
             content = x[2]
             src_name = cls.SRC_MAP.get(src, '')
 
-            msg =  u'{}   {}\n' \
-                   u'{}\n'.format(news_time, src_name, content)
-            # print msg
+            msg = u'{}   {}\n' \
+                  u'{}\n'.format(news_time, src_name, content)
+            print msg
             mail_list.append(
                msg
             )
