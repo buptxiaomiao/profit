@@ -20,8 +20,8 @@ class NewsMail(object):
 
         cursor = conn.cursor()
         cursor.execute('select substr(news_time, 1, 19) as news_time, src, content from news '
-                       'where news_time >= date_sub(current_date(), interval 1 day) '
-                       'order by news_time desc;')
+                       'where news_time >= date_sub(now(), interval 60 minute) '
+                       'order by news_time desc limit 500;')
         res = cursor.fetchall()
 
         mail_list = []
@@ -31,9 +31,11 @@ class NewsMail(object):
             content = x[2]
             src_name = cls.SRC_MAP.get(src, '')
 
+            msg =  u'{}   {}\n' \
+                   u'{}\n'.format(news_time, src_name, content)
+            print msg
             mail_list.append(
-                u'{}   {}\n'
-                u'{}\n'.format(news_time, src_name, content)
+               msg
             )
 
         mail_content = '-------------------------\n'.join(mail_list)

@@ -15,6 +15,8 @@ class MailTools(object):
                   mail_smtp_server=MAIL_SMTP_SERVER,
                   mail_recievers=MAIL_RECIEVERS):
 
+        print mail_user, mail_password, mail_smtp_server, mail_recievers
+        print subject
         # mail_user = ''
         # mail_password = ''
         # mail_smtp_server = ''
