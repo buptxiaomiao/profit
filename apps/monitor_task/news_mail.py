@@ -33,7 +33,7 @@ class NewsMail(object):
 
             msg =  u'{}   {}\n' \
                    u'{}\n'.format(news_time, src_name, content)
-            print msg
+            # print msg
             mail_list.append(
                msg
             )
