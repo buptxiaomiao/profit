@@ -20,7 +20,7 @@ class NewsMail(object):
 
         cursor = conn.cursor()
         cursor.execute('select substr(news_time, 1, 19) as news_time, src, content from news '
-                       'where news_time >= date_sub(now(), interval 60 minute) '
+                       'where news_time >= date_sub(now(), interval 120 minute) '
                        'order by news_time desc limit 500;')
         res = cursor.fetchall()
 
