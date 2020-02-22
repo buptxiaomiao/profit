@@ -1,10 +1,10 @@
 # coding: utf-8
 
-from apps.tasks.stock import TaskStockBasic
-from apps.tasks.trade_cal import TaskTradeCal
-from apps.tasks.namechange import TaskNameChange
-from apps.tasks.hs_const import TaskHSConst
-from apps.tasks.news import TaskNews
+from apps.ts_task.stock import TaskStockBasic
+from apps.ts_task.trade_cal import TaskTradeCal
+from apps.ts_task.namechange import TaskNameChange
+from apps.ts_task.hs_const import TaskHSConst
+from apps.ts_task.news import TaskNews
 
 
 class Task(object):

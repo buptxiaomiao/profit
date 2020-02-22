@@ -12,7 +12,7 @@ class App(object):
 
     @classmethod
     def task(cls):
-        from apps.tasks import Task
+        from apps.ts_task import Task
         return Task
 
 

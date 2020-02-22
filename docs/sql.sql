@@ -63,6 +63,33 @@ CREATE TABLE `hs_const` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='沪深股通成份股'
 
 
+CREATE TABLE `stock_company` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
+  `ts_code` char(32) NOT NULL DEFAULT '' COMMENT 'TS代码',
+  `exchange` varchar(32) NOT NULL DEFAULT '' COMMENT '交易所代码',
+  `chairman` varchar(64) NOT NULL DEFAULT '' COMMENT '法人代表',
+  `manager` varchar(64) NOT NULL DEFAULT '' COMMENT '总经理',
+  `secretary` varchar(64) NOT NULL DEFAULT '' COMMENT '董秘',
+  `reg_capital` FLOAT NOT NULL DEFAULT '0' COMMENT '注册资本',
+  `setup_date` varchar(32) NOT NULL DEFAULT '' COMMENT '注册日期',
+  `province` varchar(32) NOT NULL DEFAULT '' COMMENT '所在省份',
+  `city` varchar(64) NOT NULL DEFAULT '' COMMENT '所在城市',
+  `introduction` MEDIUMTEXT NOT NULL COMMENT '公司介绍',
+  `website` TEXT NOT NULL COMMENT '公司主页',
+  `email` varchar(64) NOT NULL DEFAULT '' COMMENT '电子邮件',
+  `office` TEXT NOT NULL COMMENT '办公室',
+  `employees` int(11) NOT NULL DEFAULT 0 COMMENT '员工人数',
+  `main_business` MEDIUMTEXT NOT NULL COMMENT '主要业务及产品',
+  `business_scope` MEDIUMTEXT NOT NULL COMMENT '经营范围',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_valid` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ts_code` (`ts_code`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='stock_company上市公司基本信息'
+
+
+
 CREATE TABLE `daily` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
