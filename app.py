@@ -11,9 +11,14 @@ class App(object):
         TsDaily.run()
 
     @classmethod
-    def task(cls):
-        from apps.ts_task import Task
-        return Task
+    def ts_task(cls):
+        from apps.ts_task import TsTask
+        return TsTask
+
+    @classmethod
+    def monitor_task(cls):
+        from apps.monitor_task import MonitorTask
+        return MonitorTask
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ from apps.ts_task.hs_const import TaskHSConst
 from apps.ts_task.news import TaskNews
 
 
-class Task(object):
+class TsTask(object):
 
     @classmethod
     def stock(cls):
