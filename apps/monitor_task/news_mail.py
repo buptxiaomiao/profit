@@ -37,7 +37,7 @@ class NewsMail(object):
             mail_list.append(
                msg
             )
-
+        print len(mail_list)
         mail_content = '-------------------------\n'.join(mail_list)
         MailTools.send_mail(
             subject=u'新闻简讯-{}'.format(TimeTool.datetime_to_str(TimeTool.now(), '%m-%d %H:%M')),

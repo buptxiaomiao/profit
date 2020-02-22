@@ -1,6 +1,9 @@
 # coding: utf-8
 
+import sys
 import fire
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 class App(object):

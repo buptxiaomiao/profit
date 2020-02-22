@@ -33,7 +33,8 @@ class MailTools(object):
         asmtp = smtplib.SMTP_SSL()
         asmtp.connect(mail_smtp_server)
         asmtp.login(mail_user, mail_password)
-        asmtp.sendmail(mail_user, mail_recievers.split(','), msgroot.as_string())
+        res = asmtp.sendmail(mail_user, mail_recievers.split(','), msgroot.as_string())
+        print res
         asmtp.quit()
         return
 
