@@ -67,7 +67,7 @@ class ProdPrice(object):
 
     @classmethod
     def save_db(cls, info, table, _cursor):
-        print info
+        # print info
         columns = []
         values = []
         for k, v in info.iteritems():
