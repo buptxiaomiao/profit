@@ -47,7 +47,9 @@ class ProdPrice(object):
                 mm = x.get('mm', '')
                 dd = x.get('dd', '')
                 unit = x.get('unit', '')
-                price = x.get('price', '0')
+                price = x.get('price', '0') or 0
+                if not price:
+                    continue
                 prod_spec = x.get('prod_spec', '')
                 prod_name = x.get('prod_name', '')
 
