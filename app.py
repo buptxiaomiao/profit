@@ -23,6 +23,12 @@ class App(object):
         from apps.monitor_task import MonitorTask
         return MonitorTask
 
+    @classmethod
+    def price_task(cls):
+        from apps.price_task import PriceTask
+        return PriceTask()
+
+
 
 if __name__ == '__main__':
     fire.Fire(App())
