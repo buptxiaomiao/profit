@@ -5,6 +5,7 @@ from apps.ts_task.trade_cal import TaskTradeCal
 from apps.ts_task.namechange import TaskNameChange
 from apps.ts_task.hs_const import TaskHSConst
 from apps.ts_task.news import TaskNews
+from apps.ts_task.daily import TaskDaily
 
 
 class TsTask(object):
@@ -29,3 +30,6 @@ class TsTask(object):
     def news(cls):
         return TaskNews.run()
 
+    @classmethod
+    def daily(cls):
+        return TaskDaily.run()
