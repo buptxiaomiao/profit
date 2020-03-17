@@ -23,17 +23,20 @@ class TaskDaily(object):
         cursor = conn.cursor()
         cursor.execute('set SESSION autocommit = 0;')
 
-        db_res = cursor.execute('select ts_code, list_date from stock where is_valid = 1')
+        cursor.execute('select ts_code, list_date from stock where is_valid = 1')
+        db_res = cursor.fetchall()
+
         for stock in db_res:
             ts_code = stock[0]
             list_date = stock[1]
             if flag_refresh_all == 0:
-                date_pair = cls.cal_date_pair(st=list_date)
-            else:
                 date_pair = cls.cal_date_pair(st=st, et=et)
-            for st, et in date_pair:
+            else:
+                date_pair = cls.cal_date_pair(st=list_date)
+            for _st, _et in date_pair:
                 time.sleep(1.0 / 500)
-                cls.save_daily_to_db(ts_code, st, et, cursor)
+                cls.save_daily_to_db(ts_code, _st, _et, cursor)
+                print 'ts_code:{} daily finish, st:{}, et:{}'.format(ts_code, st, et)
             conn.commit()
 
         cursor.close()
@@ -49,11 +52,13 @@ class TaskDaily(object):
                   'change', 'pct_chg', 'vol', 'amount',
                   'ma5', 'ma10', 'ma20', 'ma30', 'ma60', 'ma120',
                   'ma12', 'ma26', 'ma_v_3']
-        df.fillna(0)
+        df = df.fillna(0)
         for i, row in df.iterrows():
             values = [getattr(row, x, '') for x in fields]
-            sql = 'replace into daily ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
-            print sql, row.values
+            sql = 'replace into daily ({}) values ({})'.format(
+                ','.join(['`{}`'.format(f) for f in fields]),
+                ','.join(['%s'] * len(fields))
+            )
             cursor.execute(sql, tuple(values))
 
     @classmethod
