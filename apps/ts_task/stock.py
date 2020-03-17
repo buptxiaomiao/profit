@@ -45,7 +45,7 @@ class TaskStockBasic(object):
             sql = 'replace into stock ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
             print sql, row.values
             cursor.execute(sql, tuple([x or '' for x in row.values]))
-        cursor.execute("update stock set is_valid	= 0 where market in ('创业板', '科创板') or name like '%%ST%%'")
+        cursor.execute("update stock set is_valid	= 0 where market in ('科创板') or name like '%%ST%%'")
 
         cursor.execute('alter table stock engine=innodb; ')
         conn.commit()
