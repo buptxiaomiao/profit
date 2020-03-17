@@ -32,4 +32,4 @@ class TsTask(object):
 
     @classmethod
     def daily(cls):
-        return TaskDaily.run()
+        return TaskDaily.run

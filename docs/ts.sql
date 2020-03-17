@@ -90,6 +90,7 @@ CREATE TABLE `stock_company` (
 
 
 
+
 CREATE TABLE `daily` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
   `ts_code` char(16) NOT NULL DEFAULT '' COMMENT 'TS代码',
@@ -103,30 +104,21 @@ CREATE TABLE `daily` (
   `pct_chg` float NOT NULL DEFAULT '0' COMMENT '涨跌幅',
   `vol` float NOT NULL DEFAULT '0' COMMENT '成交量（手）',
   `amount` float NOT NULL DEFAULT '0' COMMENT '成交额 （千元）',
-  `ma2` float NOT NULL DEFAULT '0' COMMENT '2日均价',
   `ma5` float NOT NULL DEFAULT '0' COMMENT '5日均价',
   `ma10` float NOT NULL DEFAULT '0' COMMENT '10日均价',
-  `ma12` float NOT NULL DEFAULT '0' COMMENT '12日均价',
-  `ma26` float NOT NULL DEFAULT '0' COMMENT '26日均价',
+  `ma20` float NOT NULL DEFAULT '0' COMMENT '20日均价',
   `ma30` float NOT NULL DEFAULT '0' COMMENT '30日均价',
   `ma60` float NOT NULL DEFAULT '0' COMMENT '60日均价',
   `ma120` float NOT NULL DEFAULT '0' COMMENT '120日均价',
-  `ma250` float NOT NULL DEFAULT '0' COMMENT '250日均价',
-  `ma_v_2` float NOT NULL DEFAULT '0',
-  `ma_v_5` float NOT NULL DEFAULT '0',
-  `ma_v_10` float NOT NULL DEFAULT '0',
-  `ma_v_12` float NOT NULL DEFAULT '0',
-  `ma_v_26` float NOT NULL DEFAULT '0',
-  `ma_v_30` float NOT NULL DEFAULT '0',
-  `ma_v_60` float NOT NULL DEFAULT '0',
-  `ma_v_120` float NOT NULL DEFAULT '0',
-  `ma_v_250` float NOT NULL DEFAULT '0',
+  `ma12` float NOT NULL DEFAULT '0' COMMENT '12日均价',
+  `ma26` float NOT NULL DEFAULT '0' COMMENT '26日均价',
+  `ma_v_3` float NOT NULL DEFAULT '0' COMMENT '3日均成交',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  KEY `ts_code_trade_date` (`ts_code`,`trade_date`),
-  KEY `trade_date_ts_code` (`trade_date`,`ts_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9642 DEFAULT CHARSET=utf8mb4 COMMENT='A股非创业板日线'
+  UNIQUE KEY `date_code` (`trade_date`,`ts_code`),
+  KEY `code_date` (`ts_code`,`trade_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='A股非科创板日线'
 
 
 CREATE TABLE `news` (
