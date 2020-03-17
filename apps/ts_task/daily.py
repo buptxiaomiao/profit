@@ -35,8 +35,8 @@ class TaskDaily(object):
                 date_pair = cls.cal_date_pair(st=list_date)
             for _st, _et in date_pair:
                 time.sleep(1.0 / 500)
+                print 'ts_code:{} daily begin, st:{}, et:{}'.format(ts_code, _st, _et)
                 cls.save_daily_to_db(ts_code, _st, _et, cursor)
-                print 'ts_code:{} daily finish, st:{}, et:{}'.format(ts_code, st, et)
             conn.commit()
 
         cursor.close()
@@ -52,6 +52,8 @@ class TaskDaily(object):
                   'change', 'pct_chg', 'vol', 'amount',
                   'ma5', 'ma10', 'ma20', 'ma30', 'ma60', 'ma120',
                   'ma12', 'ma26', 'ma_v_3']
+        if df is None:
+            return
         df = df.fillna(0)
         for i, row in df.iterrows():
             values = [getattr(row, x, '') for x in fields]
