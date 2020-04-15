@@ -31,14 +31,14 @@ class NewsMail(object):
             content = x[2]
             src_name = cls.SRC_MAP.get(src, '')
 
-            msg = u'{}   {}\n' \
-                  u'{}\n'.format(news_time, src_name, content)
+            msg = u'{}   {}\r\n' \
+                  u'{}\r\n'.format(news_time, src_name, content)
             # print msg
             mail_list.append(
                msg
             )
         print len(mail_list)
-        mail_content = '-------------------------\n'.join(mail_list)
+        mail_content = '-------------------------\r\n'.join(mail_list)
         MailTools.send_mail(
             subject=u'新闻简讯-{}'.format(TimeTool.datetime_to_str(TimeTool.now(), '%m-%d %H:%M')),
             content=mail_content
