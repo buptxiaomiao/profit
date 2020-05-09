@@ -57,7 +57,7 @@ class TaskDaily(object):
                         ma=[5, 10, 20, 30, 60, 120, 12, 26, 3])
 
         st_check_format = TimeTool.datetime_to_str(st, '%Y%m%d')
-        if not df:
+        if df is None or df.empty:
             print 'df is null. ts_code:{}, st:{}, et:{}'.format(ts_code, api_st, et)
             return
 
