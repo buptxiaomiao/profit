@@ -48,15 +48,19 @@ class TaskDaily(object):
 
     @classmethod
     def save_daily_to_db(cls, ts_code, st, et, cursor):
-        print 'ts_code:{} daily begin, st:{}, et:{}'.format(ts_code, st, et)
 
         # 为了取120天均值
         api_st = str(TimeTool.str_to_datetime(st) - TimeTool.timedelta(days=120))[:10]
+        print 'ts_code:{} daily begin, st:{}, et:{}'.format(ts_code, st, et)
 
         df = ts.pro_bar(ts_code=ts_code, adj='qfq', start_date=api_st, end_date=et,
                         ma=[5, 10, 20, 30, 60, 120, 12, 26, 3])
 
         st_check_format = TimeTool.datetime_to_str(st, '%Y%m%d')
+        if not df:
+            print 'df is null. ts_code:{}, st:{}, et:{}'.format(ts_code, api_st, et)
+            return
+
         df = df.fillna(0).where(df['trade_date'] >= st_check_format).dropna(axis=0)
         if df is None or df.empty:
             return
