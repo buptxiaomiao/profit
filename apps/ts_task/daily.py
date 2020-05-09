@@ -51,7 +51,7 @@ class TaskDaily(object):
 
         # 为了取120天均值
         api_st = str(TimeTool.str_to_datetime(st) - TimeTool.timedelta(days=120))[:10]
-        print 'ts_code:{} daily begin, st:{}, et:{}'.format(ts_code, st, et)
+        print 'ts_code:{} daily begin, api_st:{}, et:{}'.format(ts_code, api_st, et)
 
         df = ts.pro_bar(ts_code=ts_code, adj='qfq', start_date=api_st, end_date=et,
                         ma=[5, 10, 20, 30, 60, 120, 12, 26, 3])
