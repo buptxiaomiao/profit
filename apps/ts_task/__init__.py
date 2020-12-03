@@ -16,7 +16,7 @@ class TsTask(object):
 
     @classmethod
     def trade_cal(cls):
-        return TaskTradeCal.run()
+        return TaskTradeCal.run
 
     @classmethod
     def namechange(cls):

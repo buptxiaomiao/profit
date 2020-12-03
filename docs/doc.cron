@@ -1,9 +1,25 @@
 
 # 1. 基本信息
-1 0 * * * source ~/.env && cd /root/profit && python app.py task stock
+1 0 * * * source ~/.env && cd /root/profit && python app.py ts_task stock
 
 # 2. 交易日历
-1 0 * * 1 source ~/.env && cd /root/profit && python app.py task trade_cal
+23 23 * * 1 source ~/.env && cd /root/profit && python app.py ts_task trade_cal 20200101 20220101
 
 # 3. 股票名称变更
-1 0 * * * source ~/.env && cd /root/profit && python app.py task namechange
+5 0 * * * source ~/.env && cd /root/profit && python app.py ts_task namechange
+
+# 4. 沪深成分股
+23 22 * * 1 source ~/.env && cd /root/profit && python app.py ts_task hs_const
+23 18 * * 1-5 source ~/.env && cd /root/profit && python app.py ts_task daily
+
+# 5. 新闻快讯
+* * * * * source ~/.env && cd /root/profit && python app.py ts_task news
+# * * * * * source ~/.env && cd /root/profit && python app.py monitor_task mail_news
+# 0,30 * * * * source ~/.env && cd /root/profit && python app.py monitor_task mail_news
+# 0 8-15 * * 1-5 source ~/.env && cd /root/profit && python app.py monitor_task mail_news
+# 1 0-6,16-22/2 * * 1-5 source ~/.env && cd /root/profit && python app.py monitor_task mail_news
+# 2 */2 * * 6,7 source ~/.env && cd /root/profit && python app.py monitor_task mail_news
+
+# 商品价格
+0 */6 * * * source ~/.env && cd /root/profit && python app.py price_task prod_price run
+
