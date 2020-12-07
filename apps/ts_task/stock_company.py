@@ -42,26 +42,15 @@ class TaskStockCompany(object):
         cursor = conn.cursor()
         cursor.execute('set SESSION autocommit = 1;')
 
-        cursor.execute('select ts_code from stock where is_valid = 1 order by ts_code asc;')
-        db_res = cursor.fetchall()
-
-        for stock in db_res:
-            ts_code = stock[0]
-            time.sleep(13)
-
+        # 上市公司基本信息
+        df = pro.stock_company(fields=fields)
+        for i, row in df.iterrows():
+            sql = 'replace into stock_company ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
             try:
-                # 上市公司基本信息
-                df = pro.stock_company(
-                    ts_code=ts_code, fields=fields
-                )
-                for i, row in df.iterrows():
-                    sql = 'replace into stock_company ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
-                    # print sql, row.values
-                    cursor.execute(sql, tuple([x or '' for x in row.values]))
-                    print ts_code, '  ok'
-
+                # print sql, row.values
+                cursor.execute(sql, tuple([x or '' for x in row.values]))
             except Exception as e:
-                print ts_code, 'error'
+                print row.values
 
         # cursor.execute('alter table stock_company engine=innodb; ')
         # conn.commit()
