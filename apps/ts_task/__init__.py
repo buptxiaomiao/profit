@@ -6,6 +6,7 @@ from apps.ts_task.namechange import TaskNameChange
 from apps.ts_task.hs_const import TaskHSConst
 from apps.ts_task.news import TaskNews
 from apps.ts_task.daily import TaskDaily
+from apps.ts_task.stock_company import TaskStockCompany
 
 
 class TsTask(object):
@@ -13,6 +14,10 @@ class TsTask(object):
     @classmethod
     def stock(cls):
         return TaskStockBasic.run()
+
+    @classmethod
+    def stock_company(cls):
+        return TaskStockCompany.run
 
     @classmethod
     def trade_cal(cls):
