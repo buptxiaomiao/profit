@@ -52,8 +52,8 @@ class TaskStockCompany(object):
             except Exception as e:
                 print row.values
 
-        # cursor.execute('alter table stock_company engine=innodb; ')
-        # conn.commit()
+        cursor.execute('alter table stock_company engine=innodb; ')
+        conn.commit()
         cursor.close()
         conn.close()
 
