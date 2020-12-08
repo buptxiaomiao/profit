@@ -7,6 +7,7 @@ from apps.ts_task.hs_const import TaskHSConst
 from apps.ts_task.news import TaskNews
 from apps.ts_task.daily import TaskDaily
 from apps.ts_task.stock_company import TaskStockCompany
+from apps.ts_task.moneyflow_hsgt import TaskMoneyFlowHsgt
 
 
 class TsTask(object):
@@ -38,3 +39,7 @@ class TsTask(object):
     @classmethod
     def daily(cls):
         return TaskDaily.run
+
+    @classmethod
+    def moneyflow_hsgt(cls):
+        return TaskMoneyFlowHsgt.run
