@@ -5,17 +5,20 @@ import time
 
 from settings import TOKEN
 from utils.db_tools import conn
+from utils.time_tool import TimeTool
 
 
 class TaskFundPortfolio(object):
 
     @classmethod
-    def run(cls):
+    def run(cls, incr=1):
         """
         公募基金列表
         https://tushare.pro/document/2?doc_id=121
         :return:
         """
+        start_date = TimeTool.datetime_to_str(TimeTool.now(-60), '%Y%m%d') if incr else ''
+
         # 设置ts token
         ts.set_token(TOKEN)
         pro = ts.pro_api()
@@ -41,11 +44,15 @@ class TaskFundPortfolio(object):
         cursor.execute('select ts_code, list_date from fund_basic order by ts_code asc;')
         db_res = cursor.fetchall()
 
+        q_kwargs = {}
+        if start_date:
+            q_kwargs['start_date'] = start_date
+
         for fund in db_res:
             ts_code = fund[0]
 
             df = pro.fund_portfolio(
-                fields=fields, ts_code=ts_code
+                fields=fields, ts_code=ts_code, **q_kwargs
             )
             df = df.fillna(dict(field_default))
             for i, row in df.iterrows():
