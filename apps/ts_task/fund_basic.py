@@ -99,7 +99,7 @@ CREATE TABLE `fund_basic` (
   `p_value` FLOAT NOT NULL DEFAULT 0 COMMENT '面值',
   `min_amount` FLOAT NOT NULL DEFAULT 0 COMMENT '起点金额(万元)',
   `exp_return` FLOAT NOT NULL DEFAULT 0 COMMENT '预期收益率',
-  `benchmark` char(64) NOT NULL DEFAULT '' COMMENT '	业绩比较基准',
+  `benchmark` char(1024) NOT NULL DEFAULT '' COMMENT '	业绩比较基准',
   `status` char(8) NOT NULL DEFAULT '' COMMENT '存续状态D摘牌 I发行 L已上市',
   `invest_type` char(64) NOT NULL DEFAULT '' COMMENT '投资风格',
   `type` char(64) NOT NULL DEFAULT '' COMMENT '基金类型',
