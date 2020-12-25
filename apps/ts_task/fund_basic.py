@@ -65,7 +65,7 @@ class TaskFundBasic(object):
             df = df.fillna(dict(field_default))
             for i, row in df.iterrows():
                 sql = 'replace into fund_basic ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
-                cursor.execute(sql, tuple([x if x is not np.nan else 0 for x in row.values]))
+                cursor.execute(sql, tuple([x for x in row.values]))
 
             if df.shape[0] < limit:
                 break
