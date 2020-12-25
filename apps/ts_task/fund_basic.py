@@ -20,47 +20,49 @@ class TaskFundBasic(object):
         ts.set_token(TOKEN)
         pro = ts.pro_api()
 
-        fields = [
-            u'ts_code',
-            u'name',
-            u'management',
-            u'custodian',
-            u'fund_type',
-            u'found_date',
-            u'due_date',
-            u'list_date',
-            u'issue_date',
-            u'delist_date',
-            u'issue_amount',
-            u'm_fee',
-            u'c_fee',
-            u'duration_year',
-            u'p_value',
-            u'min_amount',
-            u'exp_return',
-            u'benchmark',
-            u'status',
-            u'invest_type',
-            u'type',
-            u'trustee',
-            u'purc_startdate',
-            u'redm_startdate',
-            u'market'
-        ]
-        offset = 0
-        limit = 5000
+        field_default = (
+            ('ts_code', ''),
+            ('name', ''),
+            ('management', ''),
+            ('custodian', ''),
+            ('fund_type', ''),
+            ('found_date', ''),
+            ('due_date', ''),
+            ('list_date', ''),
+            ('issue_date', ''),
+            ('delist_date', ''),
+            ('issue_amount', 0),
+            ('m_fee', 0),
+            ('c_fee', 0),
+            ('duration_year', 0),
+            ('p_value', 0),
+            ('min_amount', 0),
+            ('exp_return', 0),
+            ('benchmark', ''),
+            ('status', ''),
+            ('invest_type', ''),
+            ('type', ''),
+            ('trustee', ''),
+            ('purc_startdate', ''),
+            ('redm_startdate', ''),
+            ('market', ''),
+        )
+
+        fields = [i[0] for i in field_default]
 
         cursor = conn.cursor()
         cursor.execute(
             'set SESSION autocommit = 0;'
         )
 
+        offset = 0
+        limit = 5000
         while 1:
             # 上市
             df = pro.fund_basic(
                 fields=fields, offset=offset, limit=limit
             )
-            df = df.fillna(0)
+            df = df.fillna(dict(field_default))
             for i, row in df.iterrows():
                 sql = 'replace into fund_basic ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
                 cursor.execute(sql, tuple([x if x is not np.nan else 0 for x in row.values]))
