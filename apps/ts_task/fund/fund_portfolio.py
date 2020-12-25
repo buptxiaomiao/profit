@@ -69,9 +69,6 @@ class TaskFundPortfolio(object):
         conn.close()
 
 
-if __name__ == '__main__':
-    TaskFundPortfolio.run()
-
 """
 CREATE TABLE `fund_portfolio` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',

@@ -8,11 +8,17 @@ from apps.ts_task.news import TaskNews
 from apps.ts_task.daily import TaskDaily
 from apps.ts_task.stock_company import TaskStockCompany
 from apps.ts_task.moneyflow_hsgt import TaskMoneyFlowHsgt
-from apps.ts_task.fund_basic import TaskFundBasic
-from apps.ts_task.fund_portfolio import TaskFundPortfolio
+from apps.ts_task.fund.fund_basic import TaskFundBasic
+from apps.ts_task.fund.fund_portfolio import TaskFundPortfolio
 
 
 class TsTask(object):
+
+    @classmethod
+    def fund(cls):
+        """获取基金相关数据"""
+        from apps.ts_task.fund import Fund
+        return Fund
 
     @classmethod
     def stock(cls):
@@ -45,11 +51,3 @@ class TsTask(object):
     @classmethod
     def moneyflow_hsgt(cls):
         return TaskMoneyFlowHsgt.run
-
-    @classmethod
-    def fund_basic(cls):
-        return TaskFundBasic.run
-
-    @classmethod
-    def fund_portfolio(cls):
-        return TaskFundPortfolio.run

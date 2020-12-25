@@ -77,9 +77,6 @@ class TaskFundBasic(object):
         conn.close()
 
 
-if __name__ == '__main__':
-    TaskFundBasic.run()
-
 """
 CREATE TABLE `fund_basic` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录id',
