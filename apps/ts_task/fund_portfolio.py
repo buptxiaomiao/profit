@@ -17,7 +17,8 @@ class TaskFundPortfolio(object):
         https://tushare.pro/document/2?doc_id=121
         :return:
         """
-        start_date = TimeTool.datetime_to_str(TimeTool.now(-60), '%Y%m%d') if incr else ''
+        # 这里的start_date通过ann_date进行的筛选.
+        start_date = TimeTool.datetime_to_str(TimeTool.now(-15), '%Y%m%d') if incr else ''
 
         # 设置ts token
         ts.set_token(TOKEN)
