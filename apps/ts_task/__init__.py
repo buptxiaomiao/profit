@@ -8,6 +8,7 @@ from apps.ts_task.news import TaskNews
 from apps.ts_task.daily import TaskDaily
 from apps.ts_task.stock_company import TaskStockCompany
 from apps.ts_task.moneyflow_hsgt import TaskMoneyFlowHsgt
+from apps.ts_task.fund_basic import TaskFundBasic
 
 
 class TsTask(object):
@@ -43,3 +44,7 @@ class TsTask(object):
     @classmethod
     def moneyflow_hsgt(cls):
         return TaskMoneyFlowHsgt.run
+
+    @classmethod
+    def fund_basic(cls):
+        return TaskFundBasic.run
