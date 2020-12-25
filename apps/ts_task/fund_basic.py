@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import tushare as ts
+import numpy as np
 
 from settings import TOKEN
 from utils.db_tools import conn
@@ -59,12 +60,12 @@ class TaskFundBasic(object):
             df = pro.fund_basic(
                 fields=fields, offset=offset, limit=limit
             )
+            df = df.fillna(0)
             for i, row in df.iterrows():
                 sql = 'replace into fund_basic ({}) values ({})'.format(','.join(fields), ','.join(['%s'] * len(row)))
-                print sql, row.values
-                cursor.execute(sql, tuple([x or '' for x in row.values]))
+                cursor.execute(sql, tuple([x if x is not np.nan else 0 for x in row.values]))
 
-            if df.count() < limit:
+            if df.shape[0] < limit:
                 break
 
             offset += limit
