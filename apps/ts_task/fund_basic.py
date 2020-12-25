@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import tushare as ts
-import numpy as np
 
 from settings import TOKEN
 from utils.db_tools import conn
