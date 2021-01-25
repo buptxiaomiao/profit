@@ -22,7 +22,9 @@ class TsTask(object):
 
     @classmethod
     def stock(cls):
-        return TaskStockBasic.run()
+        """获取股票相关数据"""
+        from apps.ts_task.stock import Stock
+        return Stock
 
     @classmethod
     def stock_company(cls):
