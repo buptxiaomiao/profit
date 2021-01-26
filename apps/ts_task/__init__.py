@@ -1,6 +1,5 @@
 # coding: utf-8
 
-from apps.ts_task.stock import TaskStockBasic
 from apps.ts_task.trade_cal import TaskTradeCal
 from apps.ts_task.namechange import TaskNameChange
 from apps.ts_task.hs_const import TaskHSConst

@@ -13,21 +13,18 @@ class TaskDailyBasic(object):
     def run_by_period(cls, st, et):
         st = TimeTool.str_to_datetime(st)
         et = TimeTool.str_to_datetime(et)
-        if not (st and et) or st < et:
-            print 'st:{}, et:{} is invalid.'
+        if not (st and et) or st > et:
+            print 'st:{}, et:{} is invalid.'.format(st, et)
             return
-
-        st = TimeTool.datetime_to_str(st, '%Y%m%d')
-        et = TimeTool.datetime_to_str(et, '%Y%m%d')
 
         t = et
         while t >= st:
             trade_date = TimeTool.datetime_to_str(t, '%Y%m%d')
-            cls.run(trade_date=trade_date)
+            cls.run(trade_date=trade_date, rebuild_table=False)
             t -= TimeTool.timedelta(days=1)
 
     @classmethod
-    def run(cls, trade_date):
+    def run(cls, trade_date=None, rebuild_table=True):
         """
         沪深股票 每日指标
         https://tushare.pro/document/2?doc_id=32
@@ -86,7 +83,8 @@ class TaskDailyBasic(object):
 
             offset += limit
 
-        cursor.execute('alter table daily_basic engine=innodb; ')
+        if rebuild_table:
+            cursor.execute('alter table daily_basic engine=innodb; ')
         conn.commit()
         cursor.close()
         conn.close()
